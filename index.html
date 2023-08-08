@@ -479,29 +479,6 @@ for (let itemId in quantities) {
 // Initial calculation of total prices when the page loads
 calculateTotalPrices();
 
- // Initialize the "Save Preferences" button
-    const mainButton = window.Telegram.WebApp.MainButton;
-    mainButton.text = "Save Preferences";
-    mainButton.enable();
-    mainButton.show();
-
-    // Create a data object to hold item preferences
-    const preferences = {};
-
-    // Make the "Save Preferences" button send data back to the backend
-    mainButton.onClick(function () {
-      for (let itemId in quantities) {
-        // Store title, quantity, and price in the preferences object
-        preferences[itemId] = {
-          title: document.querySelector(`.item-title#item-title${itemId}`).textContent,
-          quantity: quantities[itemId],
-          price: itemPrices[itemId],
-        };
-      }
-
-      // Convert preferences object to JSON and send it as data
-      window.Telegram.WebApp.sendData(JSON.stringify(preferences));
-    });
 
 let usercard = document.getElementById("usercard");
 
