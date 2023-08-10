@@ -539,23 +539,23 @@ mainButton.onClick(function () {
   const botToken = '6417754836:AAG5lxlzCefe29-sf_2BppAXwlX4vviCYg8';
   const chatId = tg.initDataUnsafe.user.id;
 
+  // Prepare the data for the API request
+  const data = new URLSearchParams();
+  data.append('chat_id', chatId);
+  data.append('text', message);
+
+  // Send the request to the Telegram bot API
   fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text: message
+    body: data,
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Message sent to Telegram bot:', data);
     })
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Message sent to Telegram bot:', data);
-  })
-  .catch(error => {
-    console.error('Error sending message to Telegram bot:', error);
-  });
+    .catch(error => {
+      console.error('Error sending message to Telegram bot:', error);
+    });
 });
     </script>
 </body>
