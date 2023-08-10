@@ -513,24 +513,50 @@ usercard.appendChild(p);
     //   // Send the 'foods' object as JSON string back to the backend
     //   //window.Telegram.WebApp.sendData(JSON.stringify(foods));
     // });
-// Add this event handler to send data to the bot when the "Save Preferences" button is clicked
-    Telegram.WebApp.MainButton.onClick(function () {
-      let selectedItems = [];
+// Add event listener for the "save" button
+mainButton.onClick(function () {
+  // Store title, quantity, and price of each item in the 'foods' object
+  let foods = [];
 
-      for (let itemId in quantities) {
-        if (quantities[itemId] > 0) {
-          selectedItems.push({
-            title: document.querySelector(`#item-title${itemId}`).textContent,
-            quantity: quantities[itemId],
-            price: itemPrices[itemId]
-          });
-        }
-      }
+  for (let itemId in quantities) {
+    if (quantities[itemId] > 0) {
+      foods.push({
+        title: document.querySelector(`#item-title${itemId}`).textContent,
+        quantity: quantities[itemId],
+        price: itemPrices[itemId]
+      });
+    }
+  }
 
-      // Send the data to the bot
-      tg.sendData(selectedItems);
-    });
+  // Send the 'foods' data to the Telegram bot
+  let message = `New order:\n`;
 
+  for (let food of foods) {
+    message += `${food.title} - Quantity: ${food.quantity} - Price: $${food.price * food.quantity}\n`;
+  }
+
+  // Replace 'YOUR_BOT_TOKEN' with your actual bot token
+  const botToken = 'YOUR_BOT_TOKEN';
+  const chatId = tg.initDataUnsafe.user.id;
+
+  fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: message
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Message sent to Telegram bot:', data);
+  })
+  .catch(error => {
+    console.error('Error sending message to Telegram bot:', error);
+  });
+});
     </script>
 </body>
 </html>
