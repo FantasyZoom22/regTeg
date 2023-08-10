@@ -253,14 +253,14 @@ function calculateTotalPrices() {
       let notification = document.getElementById(`notification${itemId}`); // Get the notification span for the corresponding item
       notification.innerText = quantities[itemId]; // Display the new quantity value in the notification
     }
-
+let mainButtonVisible = false; 
 btn1.addEventListener("click", function(){
   quantities[1]++; // Increase the quantity for item 1
   updatePrice(1); // Increase the price for item 1
       updateNotification(1); // Update the notification with the new quantity
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
     if (quantities[1] > 0) {
     removeBtn1.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
      notification1.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -280,7 +280,7 @@ btn2.addEventListener("click", function(){
   updatePrice(2); // Increase the price for item 1
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
      if (quantities[2] > 0) {
     removeBtn2.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification2.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -301,7 +301,7 @@ btn3.addEventListener("click", function(){
   updatePrice(3); // Increase the price for item 1
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
      if (quantities[3] > 0) {
     removeBtn3.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification3.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -321,7 +321,7 @@ btn4.addEventListener("click", function(){
   updatePrice(4); // Increase the price for item 1
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
      if (quantities[4] > 0) {
     removeBtn4.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification4.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -341,7 +341,7 @@ btn5.addEventListener("click", function(){
   updatePrice(5); // Increase the price for item 1
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
      if (quantities[5] > 0) {
     removeBtn5.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification5.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -361,7 +361,7 @@ btn6.addEventListener("click", function(){
   updatePrice(6); // Increase the price for item 1
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
      if (quantities[6] > 0) {
     removeBtn6.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification6.style.display = "inline"; // Show the notification when the quantity is greater than 0
