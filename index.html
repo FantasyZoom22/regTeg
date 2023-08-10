@@ -495,30 +495,46 @@ usercard.appendChild(p);
     mainButton.show();
 
     // Create an object to store food preferences
-    let foods = {};
+    //  let foods = {};
 
+    // // Add event listener for the "save" button
+    // mainButton.onClick(function () {
+    //   // Store title, quantity, and price of each item in the 'foods' object
+    //   for (let itemId in quantities) {
+    //     if (quantities[itemId] > 0) {
+    //       foods[itemId] = {
+    //         title: document.querySelector(`#item-title${itemId}`).textContent,
+    //         quantity: quantities[itemId],
+    //         price: itemPrices[itemId]
+    //       };
+    //     }
+    //   }
+
+    //   // Send the 'foods' object as JSON string back to the backend
+    //   //window.Telegram.WebApp.sendData(JSON.stringify(foods));
+    // });
     // Add event listener for the "save" button
-    mainButton.onClick(function () {
-      // Store title, quantity, and price of each item in the 'foods' object
-      for (let itemId in quantities) {
-        if (quantities[itemId] > 0) {
-          foods[itemId] = {
-            title: document.querySelector(`#item-title${itemId}`).textContent,
-            quantity: quantities[itemId],
-            price: itemPrices[itemId]
-          };
-        }
-      }
+mainButton.onClick(function () {
+  // Store title, quantity, and price of each item in the 'foods' object
+  let foods = {}; // Create an object to store food preferences
 
-      // Send the 'foods' object as JSON string back to the backend
-      window.Telegram.WebApp.sendData(JSON.stringify(foods));
-    });
+  for (let itemId in quantities) {
+    if (quantities[itemId] > 0) {
+      foods[itemId] = {
+        title: document.querySelector(`#item-title${itemId}`).textContent,
+        quantity: quantities[itemId],
+        price: itemPrices[itemId]
+      };
+    }
+  }
 
-    // Handle a service message on the bot's side to get the data sent back from the Web-App
-    Telegram.BotApi.onServiceMessage("foods_data", function (data) {
-      console.log("Received foods data:", data);
-      // You can process the received data here
-    });
+  // Send the 'foods' object as JSON string back to the backend
+  let foodsData = JSON.stringify(foods);
+
+  // Use the tg object to send data to the Telegram bot
+  tg.sendData({ foods: foodsData });
+});
+
     </script>
 </body>
 </html>
