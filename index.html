@@ -267,7 +267,7 @@ btn1.addEventListener("click", function(){
   }
   }
   else {
-    tg.MainButton.setText(`Вы выбрали товар 1! Количество: ${quantities[1]}`);
+    tg.MainButton.setText(`Вы выбрали товар ${item}!`);
     item = "1";
     tg.MainButton.show();
   }
@@ -348,7 +348,7 @@ btn5.addEventListener("click", function(){
   }
   }
   else {
-    //tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
+    tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
     item = "5";
     tg.MainButton.show();
   }
@@ -522,28 +522,29 @@ mainButton.show();
 //   tg.close();
 // });
 
-    const botToken = '6417754836:AAG5lxlzCefe29-sf_2BppAXwlX4vviCYg8';
+ // Function to create an inline keyboard with quantity options
+function createInlineKeyboard(itemId) {
+  const options = [
+    { text: '1', callback_data: `quantity:${itemId}:1` },
+    { text: '2', callback_data: `quantity:${itemId}:2` },
+    { text: '3', callback_data: `quantity:${itemId}:3` },
+    // Add more options as needed
+  ];
 
-// Function to send data to the Telegram bot
-function sendToTelegram(itemId, quantity, total) {
-  const message = `Item: ${itemId}\nQuantity: ${quantity}\nTotal Price: $${total}`;
-  fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=@EbarbarosBot&text=${message}`)
-    .then(response => response.json())
-    .then(data => {
-      console.log('Message sent to Telegram:', data);
-    })
-    .catch(error => {
-      console.error('Error sending message to Telegram:', error);
-    });
+  return JSON.stringify({
+    inline_keyboard: [options],
+  });
 }
 
-// Update your mainButtonClicked event handler to call the sendToTelegram function
+// Update your mainButtonClicked event handler to display the inline keyboard
 Telegram.WebApp.onEvent('mainButtonClicked', function () {
   if (item && quantities[item] > 0) {
     const total = itemPrices[item] * quantities[item];
-    sendToTelegram(item, quantities[item], total);
+    tg.showKeyboard(createInlineKeyboard(item));
   }
 });
+
+    
     </script>
 </body>
 </html>
