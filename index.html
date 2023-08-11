@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
 <style>
@@ -252,18 +253,11 @@ function calculateTotalPrices() {
       let notification = document.getElementById(`notification${itemId}`); // Get the notification span for the corresponding item
       notification.innerText = quantities[itemId]; // Display the new quantity value in the notification
     }
-let foods = {}; 
-    
+
 btn1.addEventListener("click", function(){
   quantities[1]++; // Increase the quantity for item 1
   updatePrice(1); // Increase the price for item 1
-  updateNotification(1); // Update the notification with the new quantity
-
-  foods[1] = {
-    title: "Pizza",
-    quantity: quantities[1],
-    price: itemPrices[1]
-  };
+      updateNotification(1); // Update the notification with the new quantity
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.hide();
@@ -284,12 +278,6 @@ btn2.addEventListener("click", function(){
   quantities[2]++; // Increase the quantity for item 2
   updateNotification(2); // Update the notification with the new quantity
   updatePrice(2); // Increase the price for item 1
-
-  foods[2] = {
-    title: "Pizza",
-    quantity: quantities[2],
-    price: itemPrices[2]
-  };
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.hide();
@@ -312,12 +300,6 @@ btn3.addEventListener("click", function(){
   updateNotification(3); // Update the notification with the new quantity
   updatePrice(3); // Increase the price for item 1
 
-  foods[3] = {
-    title: "Pizza",
-    quantity: quantities[3],
-    price: itemPrices[3]
-  };
-
   if (tg.MainButton.isVisible) {
     tg.MainButton.hide();
      if (quantities[3] > 0) {
@@ -337,12 +319,6 @@ btn4.addEventListener("click", function(){
   quantities[4]++; // Increase the quantity for item 2
   updateNotification(4); // Update the notification with the new quantity
   updatePrice(4); // Increase the price for item 1
-
-  foods[4] = {
-    title: "Pizza",
-    quantity: quantities[4],
-    price: itemPrices[4]
-  };
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.hide();
@@ -364,12 +340,6 @@ btn5.addEventListener("click", function(){
   updateNotification(5); // Update the notification with the new quantity
   updatePrice(5); // Increase the price for item 1
 
-  foods[5] = {
-    title: "Pizza",
-    quantity: quantities[5],
-    price: itemPrices[5]
-  };
-
   if (tg.MainButton.isVisible) {
     tg.MainButton.hide();
      if (quantities[5] > 0) {
@@ -390,12 +360,6 @@ btn6.addEventListener("click", function(){
   updateNotification(6); // Update the notification with the new quantity
   updatePrice(6); // Increase the price for item 1
 
-foods[6] = {
-    title: "Pizza",
-    quantity: quantities[6],
-    price: itemPrices[6]
-  };
-    
   if (tg.MainButton.isVisible) {
     tg.MainButton.hide();
      if (quantities[6] > 0) {
@@ -532,18 +496,32 @@ mainButton.text = "Save Preferences";
 mainButton.enable();
 mainButton.show();
 
+// Create an object to store food preferences
+let foods = {};
 
-  
+    
+//send data 
 mainButton.onClick(function () {
-  // Before sending data
-  console.log(JSON.stringify(foods));
-  tg.sendData({ foods: JSON.stringify(foods)}, function () {
+  console.log("Save button clicked."); // Add this line to debug
 
-    console.log("Data sent successfully.");
-    tg.close();
+  // Store title, quantity, and price of each item in the 'foods' object
+  for (let itemId in quantities) {
+    if (quantities[itemId] > 0) {
+      foods[itemId] = {
+        title: document.querySelector(`#item-title${itemId}`).textContent,
+        quantity: quantities[itemId],
+        price: itemPrices[itemId]
+      };
+    }
+  }
+
+  // Send the 'foods' object as JSON string to the Telegram bot
+  tg.sendData({ foods: JSON.stringify(foods) }, function () {
+    console.log("Data sent successfully."); // Add this line to confirm data sent
+    tg.close(); // Close the Web App after data is sent
   });
 });
-    
+
     </script>
 </body>
 </html>
