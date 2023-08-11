@@ -489,31 +489,7 @@ p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.las
 usercard.appendChild(p);
 
 
-
-                                       
-    //  // Initialize the "save" button
-    // const mainButton = window.Telegram.WebApp.MainButton;
-    // mainButton.text = "Save Preferences";
-    // mainButton.enable();
-    // mainButton.show();
-
-    // // Create an object to store food preferences
-    // let foods = {};
-
-    // // Add event listener for the "save" button
-    // mainButton.onClick(function () {
-    //   // Store title, quantity, and price of each item in the 'foods' object
-    //   for (let itemId in quantities) {
-    //     if (quantities[itemId] > 0) {
-    //       foods[itemId] = {
-    //         title: document.querySelector(`#item-title${itemId}`).textContent,
-    //         quantity: quantities[itemId],
-    //         price: itemPrices[itemId]
-    //       };
-    //     }
-    //   }
-
-    // Initialize the "save" button
+// Initialize the "save" button
 const mainButton = window.Telegram.WebApp.MainButton;
 mainButton.text = "Save Preferences";
 mainButton.enable();
@@ -523,7 +499,7 @@ mainButton.show();
 let foods = {};
 
 // Add event listener for the "save" button
-mainButton.onClick(() => {
+mainButton.onClick(function () {
   // Store title, quantity, and price of each item in the 'foods' object
   for (let itemId in quantities) {
     if (quantities[itemId] > 0) {
@@ -536,18 +512,10 @@ mainButton.onClick(() => {
   }
 
   // Send the 'foods' object as JSON string back to the backend
-  const jsonData = JSON.stringify(foods);
-  
-  // Send the JSON data to the Telegram bot or your backend
-  // For demonstration purposes, I'll log it here
-  console.log(jsonData);
-  window.Telegram.WebApp.sendData(JSON.stringify(jsonData));
-  // You can replace the console.log with your actual data sending code
+  window.Telegram.WebApp.sendData(JSON.stringify(foods));
 });
+//This code will gather the selected items' data and send it to your backend as a JSON string when the "Save Preferences" button is clicked in the Telegram Web App interface. Make sure you have appropriate handling on your backend to receive and process this JSON data sent by the Telegram Web App.
 
-      // Send the 'foods' object as JSON string back to the backend
-    //   window.Telegram.WebApp.sendData(JSON.stringify(js));
-    // });
 
     </script>
 </body>
