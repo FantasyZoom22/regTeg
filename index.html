@@ -496,12 +496,12 @@ mainButton.enable();
 mainButton.show();
 
 // Create an object to store food preferences
-let foods = {};
+
 
 // Add event listener for the "save" button
 mainButton.onClick(function () {
   console.log("Save button clicked."); // Add this line to debug
-
+let foods = {};
   // Store selected items with their titles, quantities, and prices in the 'foods' object
   for (let itemId in quantities) {
     if (quantities[itemId] > 0) {
