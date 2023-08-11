@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Food</title>
+  <title>Document</title>
 </head>
 <style>
 body {
@@ -167,6 +167,7 @@ body {
   <div class="usercard" id="usercard">
     
   </div>
+
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     let tg = window.Telegram.WebApp;
@@ -259,7 +260,7 @@ btn1.addEventListener("click", function(){
       updateNotification(1); // Update the notification with the new quantity
 
   if (tg.MainButton.isVisible) {
-    //tg.MainButton.hide();
+    tg.MainButton.hide();
     if (quantities[1] > 0) {
     removeBtn1.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
      notification1.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -268,7 +269,7 @@ btn1.addEventListener("click", function(){
   else {
     tg.MainButton.setText(`Вы выбрали товар 1! Количество: ${quantities[1]}`);
     item = "1";
-    //tg.MainButton.show();
+    tg.MainButton.show();
   }
   calculateTotalPrices();
 });
@@ -279,7 +280,7 @@ btn2.addEventListener("click", function(){
   updatePrice(2); // Increase the price for item 1
 
   if (tg.MainButton.isVisible) {
-    //tg.MainButton.hide();
+    tg.MainButton.hide();
      if (quantities[2] > 0) {
     removeBtn2.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification2.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -288,7 +289,7 @@ btn2.addEventListener("click", function(){
   else {
     tg.MainButton.setText(`Вы выбрали товар 2! Количество: ${quantities[2]}`);
     item = "2";
-    //tg.MainButton.show();
+    tg.MainButton.show();
   }
   calculateTotalPrices();
 });
@@ -300,7 +301,7 @@ btn3.addEventListener("click", function(){
   updatePrice(3); // Increase the price for item 1
 
   if (tg.MainButton.isVisible) {
-    //tg.MainButton.hide();
+    tg.MainButton.hide();
      if (quantities[3] > 0) {
     removeBtn3.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification3.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -309,7 +310,7 @@ btn3.addEventListener("click", function(){
   else {
     tg.MainButton.setText(`Вы выбрали товар 3! Количество: ${quantities[3]}`);
     item = "3";
-    //tg.MainButton.show();
+    tg.MainButton.show();
   }
   calculateTotalPrices();
 });
@@ -320,7 +321,7 @@ btn4.addEventListener("click", function(){
   updatePrice(4); // Increase the price for item 1
 
   if (tg.MainButton.isVisible) {
-    //tg.MainButton.hide();
+    tg.MainButton.hide();
      if (quantities[4] > 0) {
     removeBtn4.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification4.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -329,7 +330,7 @@ btn4.addEventListener("click", function(){
   else {
     tg.MainButton.setText(`Вы выбрали товар 4! Количество: ${quantities[4]}`);
     item = "4";
-    //tg.MainButton.show();
+    tg.MainButton.show();
   }
   calculateTotalPrices();
 });
@@ -340,16 +341,16 @@ btn5.addEventListener("click", function(){
   updatePrice(5); // Increase the price for item 1
 
   if (tg.MainButton.isVisible) {
-    //tg.MainButton.hide();
+    tg.MainButton.hide();
      if (quantities[5] > 0) {
     removeBtn5.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification5.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
   }
   else {
-    tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
+    //tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
     item = "5";
-    //tg.MainButton.show();
+    tg.MainButton.show();
   }
   calculateTotalPrices();
 });
@@ -360,16 +361,16 @@ btn6.addEventListener("click", function(){
   updatePrice(6); // Increase the price for item 1
 
   if (tg.MainButton.isVisible) {
-    //tg.MainButton.hide();
+    tg.MainButton.hide();
      if (quantities[6] > 0) {
     removeBtn6.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification6.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
   }
   else {
-    tg.MainButton.setText(`Вы выбрали товар 6! Количество: ${quantities[6]}`);
+    //tg.MainButton.setText(`Вы выбрали товар 6! Количество: ${quantities[6]}`);
     item = "6";
-    //tg.MainButton.show();
+    tg.MainButton.show();
   }
   calculateTotalPrices();
 });
@@ -486,22 +487,24 @@ let p = document.createElement("p");
 p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
 
 usercard.appendChild(p);
-    
 
-// Initialize the "save" button
+
+
+// // Initialize the "save" button
 const mainButton = window.Telegram.WebApp.MainButton;
 mainButton.text = "Save Preferences";
 mainButton.enable();
 mainButton.show();
 
 // Create an object to store food preferences
+let foods = {};
 
-
-// Add event listener for the "save" button
+    
+//send data 
 mainButton.onClick(function () {
   console.log("Save button clicked."); // Add this line to debug
-let foods = {};
-  // Store selected items with their titles, quantities, and prices in the 'foods' object
+
+  // Store title, quantity, and price of each item in the 'foods' object
   for (let itemId in quantities) {
     if (quantities[itemId] > 0) {
       foods[itemId] = {
@@ -515,16 +518,10 @@ let foods = {};
   // Send the 'foods' object as JSON string to the Telegram bot
   tg.sendData({ foods: JSON.stringify(foods) }, function () {
     console.log("Data sent successfully."); // Add this line to confirm data sent
-
-    // You can add additional actions here if needed
-
-    // For example, display a confirmation message to the user
-    alert("Your food preferences have been saved!");
-
-    // Optionally, you can close the Web App after sending the data
-    // tg.close();
+    tg.close(); // Close the Web App after data is sent
   });
 });
+
     </script>
 </body>
 </html>
