@@ -495,31 +495,32 @@ mainButton.text = "Save Preferences";
 mainButton.enable();
 mainButton.show();
 
-// // Create an object to store food preferences
-// let foods = {};
+// Create an object to store food preferences
+let foods = {};
 
-// // Add event listener for the "save" button
-// mainButton.onClick(function () {
-//   console.log("Save button clicked."); // Add this line to debug
-//   // Store title, quantity, and price of each item in the 'foods' object
-//   for (let itemId in quantities) {
-//     if (quantities[itemId] > 0) {
-//       foods[itemId] = {
-//         title: document.querySelector(`#item-title${itemId}`).textContent,
-//         quantity: quantities[itemId],
-//         price: itemPrices[itemId]
-//       };
-//     }
-//   }
-
-//   // Send the 'foods' object as JSON string to the Telegram bot
-//   tg.sendData({ foods: JSON.stringify(foods) });
-// });
-    
+// Add event listener for the "save" button
 mainButton.onClick(function () {
-  tg.sendData({ message: "Hello, bot!" });
-  // Rest of your code here
+  console.log("Save button clicked."); // Add this line to debug
+  // Store title, quantity, and price of each item in the 'foods' object
+  for (let itemId in quantities) {
+    if (quantities[itemId] > 0) {
+      foods[itemId] = {
+        title: document.querySelector(`#item-title${itemId}`).textContent,
+        quantity: quantities[itemId],
+        price: itemPrices[itemId]
+      };
+    }
+  }
+
+  // Send the 'foods' object as JSON string to the Telegram bot
+  tg.sendData({ foods: JSON.stringify(foods) });
 });
+
+    // to test 
+// mainButton.onClick(function () {
+//   tg.sendData({ message: "Hello, bot!" });
+//   // Rest of your code here
+// });
     </script>
 </body>
 </html>
