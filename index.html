@@ -167,7 +167,7 @@ body {
   <div class="usercard" id="usercard">
     
   </div>
-
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     let tg = window.Telegram.WebApp;
@@ -487,45 +487,64 @@ let p = document.createElement("p");
 p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
 
 usercard.appendChild(p);
-
-
-// Initialize the "save" button
-const mainButton = window.Telegram.WebApp.MainButton;
-mainButton.text = "Save Preferences";
-mainButton.enable();
-mainButton.show();
-
-// Create an object to store food preferences
-
-
-// Add event listener for the "save" button
-mainButton.onClick(function () {
-  console.log("Save button clicked."); // Add this line to debug
-let foods = {};
-  // Store selected items with their titles, quantities, and prices in the 'foods' object
-  for (let itemId in quantities) {
-    if (quantities[itemId] > 0) {
-      foods[itemId] = {
-        title: document.querySelector(`#item-title${itemId}`).textContent,
-        quantity: quantities[itemId],
-        price: itemPrices[itemId]
-      };
-    }
-  }
-
-  // Send the 'foods' object as JSON string to the Telegram bot
-  tg.sendData({ foods: JSON.stringify(foods) }, function () {
-    console.log("Data sent successfully."); // Add this line to confirm data sent
-
-    // You can add additional actions here if needed
-
-    // For example, display a confirmation message to the user
-    alert("Your food preferences have been saved!");
-
-    // Optionally, you can close the Web App after sending the data
-    // tg.close();
-  });
+    
+//initialize the AngularJS stuff...
+angular.module("custom-webapp-ui", []).controller('CustomUIController', function CustomUIController($scope) {
+  //init our slider values that we will display
+  $scope.foods = [
+          { name: "fruits", value: 5 },
+          { name: "vegetables", value: 5 },
+          { name: "meat", value: 5 },
+          { name: "dairy", value: 5 }
+      ];
+  //initialize the "save" button
+  const mainButton = window.Telegram.WebApp.MainButton;
+  mainButton.text = "Save Preferences";
+  mainButton.enable();
+  mainButton.show();
+  // and make it send the "foods" object (as JSON string) back to the backend
+  mainButton.onClick(function(){
+    window.Telegram.WebApp.sendData(JSON.stringify($scope.foods));
+  })
 });
+
+// // Initialize the "save" button
+// const mainButton = window.Telegram.WebApp.MainButton;
+// mainButton.text = "Save Preferences";
+// mainButton.enable();
+// mainButton.show();
+
+// // Create an object to store food preferences
+
+
+// // Add event listener for the "save" button
+// mainButton.onClick(function () {
+//   console.log("Save button clicked."); // Add this line to debug
+// let foods = {};
+//   // Store selected items with their titles, quantities, and prices in the 'foods' object
+//   for (let itemId in quantities) {
+//     if (quantities[itemId] > 0) {
+//       foods[itemId] = {
+//         title: document.querySelector(`#item-title${itemId}`).textContent,
+//         quantity: quantities[itemId],
+//         price: itemPrices[itemId]
+//       };
+//     }
+//   }
+
+//   // Send the 'foods' object as JSON string to the Telegram bot
+//   tg.sendData({ foods: JSON.stringify(foods) }, function () {
+//     console.log("Data sent successfully."); // Add this line to confirm data sent
+
+//     // You can add additional actions here if needed
+
+//     // For example, display a confirmation message to the user
+//     alert("Your food preferences have been saved!");
+
+//     // Optionally, you can close the Web App after sending the data
+//     // tg.close();
+//   });
+// });
     </script>
 </body>
 </html>
