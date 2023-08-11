@@ -267,7 +267,7 @@ btn1.addEventListener("click", function(){
   }
   }
   else {
-    //tg.MainButton.setText(`Вы выбрали товар 1! Количество: ${quantities[1]}`);
+    tg.MainButton.setText(`Вы выбрали товар 1! Количество: ${quantities[1]}`);
     item = "1";
     tg.MainButton.show();
   }
@@ -287,7 +287,7 @@ btn2.addEventListener("click", function(){
   }
   }
   else {
-    //tg.MainButton.setText(`Вы выбрали товар 2! Количество: ${quantities[2]}`);
+    tg.MainButton.setText(`Вы выбрали товар 2! Количество: ${quantities[2]}`);
     item = "2";
     tg.MainButton.show();
   }
@@ -308,7 +308,7 @@ btn3.addEventListener("click", function(){
   }
   }
   else {
-    //tg.MainButton.setText(`Вы выбрали товар 3! Количество: ${quantities[3]}`);
+    tg.MainButton.setText(`Вы выбрали товар 3! Количество: ${quantities[3]}`);
     item = "3";
     tg.MainButton.show();
   }
@@ -328,7 +328,7 @@ btn4.addEventListener("click", function(){
   }
   }
   else {
-    //tg.MainButton.setText(`Вы выбрали товар 4! Количество: ${quantities[4]}`);
+    tg.MainButton.setText(`Вы выбрали товар 4! Количество: ${quantities[4]}`);
     item = "4";
     tg.MainButton.show();
   }
@@ -348,7 +348,7 @@ btn5.addEventListener("click", function(){
   }
   }
   else {
-    //tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
+    tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
     item = "5";
     tg.MainButton.show();
   }
@@ -368,7 +368,7 @@ btn6.addEventListener("click", function(){
   }
   }
   else {
-    //tg.MainButton.setText(`Вы выбрали товар 6! Количество: ${quantities[6]}`);
+    tg.MainButton.setText(`Вы выбрали товар 6! Количество: ${quantities[6]}`);
     item = "6";
     tg.MainButton.show();
   }
@@ -491,31 +491,63 @@ usercard.appendChild(p);
 
 
                                        
-     // Initialize the "save" button
-    const mainButton = window.Telegram.WebApp.MainButton;
-    mainButton.text = "Save Preferences";
-    mainButton.enable();
-    mainButton.show();
+    //  // Initialize the "save" button
+    // const mainButton = window.Telegram.WebApp.MainButton;
+    // mainButton.text = "Save Preferences";
+    // mainButton.enable();
+    // mainButton.show();
 
-    // Create an object to store food preferences
-    let foods = {};
+    // // Create an object to store food preferences
+    // let foods = {};
 
-    // Add event listener for the "save" button
-    mainButton.onClick(function () {
-      // Store title, quantity, and price of each item in the 'foods' object
-      for (let itemId in quantities) {
-        if (quantities[itemId] > 0) {
-          foods[itemId] = {
-            title: document.querySelector(`#item-title${itemId}`).textContent,
-            quantity: quantities[itemId],
-            price: itemPrices[itemId]
-          };
-        }
-      }
+    // // Add event listener for the "save" button
+    // mainButton.onClick(function () {
+    //   // Store title, quantity, and price of each item in the 'foods' object
+    //   for (let itemId in quantities) {
+    //     if (quantities[itemId] > 0) {
+    //       foods[itemId] = {
+    //         title: document.querySelector(`#item-title${itemId}`).textContent,
+    //         quantity: quantities[itemId],
+    //         price: itemPrices[itemId]
+    //       };
+    //     }
+    //   }
+
+    // Initialize the "save" button
+const mainButton = window.Telegram.WebApp.MainButton;
+mainButton.text = "Save Preferences";
+mainButton.enable();
+mainButton.show();
+
+// Create an object to store food preferences
+let foods = {};
+
+// Add event listener for the "save" button
+mainButton.onClick(() => {
+  // Store title, quantity, and price of each item in the 'foods' object
+  for (let itemId in quantities) {
+    if (quantities[itemId] > 0) {
+      foods[itemId] = {
+        title: document.querySelector(`#item-title${itemId}`).textContent,
+        quantity: quantities[itemId],
+        price: itemPrices[itemId]
+      };
+    }
+  }
+
+  // Send the 'foods' object as JSON string back to the backend
+  const jsonData = JSON.stringify(foods);
+  
+  // Send the JSON data to the Telegram bot or your backend
+  // For demonstration purposes, I'll log it here
+  console.log(jsonData);
+  window.Telegram.WebApp.sendData(JSON.stringify(jsonData));
+  // You can replace the console.log with your actual data sending code
+});
 
       // Send the 'foods' object as JSON string back to the backend
-      window.Telegram.WebApp.sendData(JSON.stringify(foods));
-    });
+    //   window.Telegram.WebApp.sendData(JSON.stringify(js));
+    // });
 
     </script>
 </body>
