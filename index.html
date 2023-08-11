@@ -107,7 +107,7 @@ body {
 }
 
 </style>
-<body ng-app="custom-webapp-ui" ng-controller="CustomUIController">
+<body>
   <div class="container">
     <div class="inner">
       <div class="item">
@@ -167,11 +167,10 @@ body {
   <div class="usercard" id="usercard">
     
   </div>
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
-  let tg = window.Telegram.WebApp;
-
+    let tg = window.Telegram.WebApp;
 
 tg.expand();
 
@@ -254,7 +253,7 @@ function calculateTotalPrices() {
       let notification = document.getElementById(`notification${itemId}`); // Get the notification span for the corresponding item
       notification.innerText = quantities[itemId]; // Display the new quantity value in the notification
     }
-let mainButtonVisible = false; 
+
 btn1.addEventListener("click", function(){
   quantities[1]++; // Increase the quantity for item 1
   updatePrice(1); // Increase the price for item 1
@@ -462,6 +461,11 @@ removeBtn6.addEventListener("click", function(){
 
 
 
+
+Telegram.WebApp.onEvent("mainButtonClicked", function(){
+  tg.sendData({ item: item, quantity: quantities[item] }); // Send both item and quantity data to Telegram
+});
+
 function updateNotification(itemId) {
   let notification = document.getElementById(`notification${itemId}`); // Get the notification span for the corresponding item
   notification.innerText = quantities[itemId]; // Display the new quantity value in the notification
@@ -483,55 +487,6 @@ let p = document.createElement("p");
 p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
 
 usercard.appendChild(p);
-
-     // Initialize the "save" button
-    const mainButton = window.Telegram.WebApp.MainButton;
-    mainButton.text = "Save Preferences";
-    mainButton.enable();
-    mainButton.show();
-
-    // // Create an object to store food preferences
-    //  let foods = {};
-
-    // // // Add event listener for the "save" button
-    // mainButton.onClick(function () {
-    //   // Store title, quantity, and price of each item in the 'foods' object
-    //   for (let itemId in quantities) {
-    //     if (quantities[itemId] > 0) {
-    //       foods[itemId] = {
-    //         title: document.querySelector(`#item-title${itemId}`).textContent,
-    //         quantity: quantities[itemId],
-    //         price: itemPrices[itemId]
-    //       };
-    //     }
-    //   }
-
-    //   // Send the 'foods' object as JSON string back to the backend
-    //  tg.sendData(JSON.stringify(foods));
-    // });
-
-     angular.module("custom-webapp-ui", [])
-      .controller('CustomUIController', function CustomUIController($scope) {
-        // Initialize foods data
-        $scope.foods = [
-          { name: "fruits", value: 5, price: 2.5 },
-          { name: "vegetables", value: 5, price: 1.5 },
-          { name: "meat", value: 5, price: 3.0 },
-          { name: "dairy", value: 5, price: 2.0 }
-        ];
-
-        // Save Preferences button action
-        $scope.savePreferences = function() {
-          const mainButton = window.Telegram.WebApp.MainButton;
-          mainButton.text = "Save Preferences";
-          mainButton.enable();
-          mainButton.show();
-
-          const data = JSON.stringify($scope.foods);
-          window.Telegram.WebApp.sendData(data);
-        };
-      });
-    
     </script>
 </body>
 </html>
