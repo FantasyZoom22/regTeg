@@ -490,29 +490,26 @@ usercard.appendChild(p);
     mainButton.enable();
     mainButton.show();
 
-    // // Create an object to store food preferences
-    //  let foods = {};
+    // Create an object to store food preferences
+     let foods = {};
 
-    // // // Add event listener for the "save" button
-    // mainButton.onClick(function () {
-    //   // Store title, quantity, and price of each item in the 'foods' object
-    //   for (let itemId in quantities) {
-    //     if (quantities[itemId] > 0) {
-    //       foods[itemId] = {
-    //         title: document.querySelector(`#item-title${itemId}`).textContent,
-    //         quantity: quantities[itemId],
-    //         price: itemPrices[itemId]
-    //       };
-    //     }
-    //   }
+    // // Add event listener for the "save" button
+    mainButton.onClick(function () {
+      // Store title, quantity, and price of each item in the 'foods' object
+      for (let itemId in quantities) {
+        if (quantities[itemId] > 0) {
+          foods[itemId] = {
+            title: document.querySelector(`#item-title${itemId}`).textContent,
+            quantity: quantities[itemId],
+            price: itemPrices[itemId]
+          };
+        }
+      }
 
-    //   // Send the 'foods' object as JSON string back to the backend
-    //  tg.sendData(JSON.stringify(foods));
-    // });
+      // Send the 'foods' object as JSON string back to the backend
+     tg.sendData(JSON.stringify(foods));
+    });
     
-Telegram.WebApp.onEvent("mainButtonClicked", function(){
-  tg.sendData({ item: item, quantity: quantities[item] }); // Send both item and quantity data to Telegram
-});
     </script>
 </body>
 </html>
