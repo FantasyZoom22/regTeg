@@ -496,11 +496,13 @@ mainButton.enable();
 mainButton.show();
 
 // Create an object to store food preferences
-let foods = {"message": "data received"};
+let foods = {};
 
-// Add event listener for the "save" button
+    
+//send data 
 mainButton.onClick(function () {
   console.log("Save button clicked."); // Add this line to debug
+
   // Store title, quantity, and price of each item in the 'foods' object
   for (let itemId in quantities) {
     if (quantities[itemId] > 0) {
@@ -513,7 +515,10 @@ mainButton.onClick(function () {
   }
 
   // Send the 'foods' object as JSON string to the Telegram bot
-  tg.sendData({ foods: JSON.stringify(foods) });
+  tg.sendData({ foods: JSON.stringify(foods) }, function () {
+    console.log("Data sent successfully."); // Add this line to confirm data sent
+    tg.close(); // Close the Web App after data is sent
+  });
 });
 
     // to test 
