@@ -502,9 +502,8 @@ let foods = {};
     
 //send data 
 mainButton.onClick(function () {
-  console.log("Save button clicked."); // Add this line to debug
-
-  // Store title, quantity, and price of each item in the 'foods' object
+  // Store food preferences in the 'foods' object
+  let foods = {};
   for (let itemId in quantities) {
     if (quantities[itemId] > 0) {
       foods[itemId] = {
@@ -514,14 +513,10 @@ mainButton.onClick(function () {
       };
     }
   }
-
-  // Send the 'foods' object as JSON string to the Telegram bot
-  tg.sendData({ foods: JSON.stringify(foods) }, function () {
-    console.log("Data sent successfully."); // Add this line to confirm data sent
-    tg.close(); // Close the Web App after data is sent
-  });
+  
+  // Send the 'foods' object to the Telegram bot
+  tg.sendData({ foods: JSON.stringify(foods) });
 });
-
     </script>
 </body>
 </html>
