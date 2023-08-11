@@ -171,7 +171,8 @@ body {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
-    let tg = window.Telegram.WebApp;
+  let tg = window.Telegram.WebApp;
+
 
 tg.expand();
 
@@ -463,9 +464,9 @@ removeBtn6.addEventListener("click", function(){
 
 
 
-Telegram.WebApp.onEvent("mainButtonClicked", function(){
-  tg.sendData({ item: item, quantity: quantities[item] }); // Send both item and quantity data to Telegram
-});
+// Telegram.WebApp.onEvent("mainButtonClicked", function(){
+//   tg.sendData({ item: item, quantity: quantities[item] }); // Send both item and quantity data to Telegram
+// });
 
 function updateNotification(itemId) {
   let notification = document.getElementById(`notification${itemId}`); // Get the notification span for the corresponding item
@@ -512,7 +513,7 @@ usercard.appendChild(p);
       }
 
       // Send the 'foods' object as JSON string back to the backend
-      window.Telegram.WebApp.sendData(JSON.stringify(foods));
+     tg.sendData(JSON.stringify(foods));
     });
     </script>
 </body>
