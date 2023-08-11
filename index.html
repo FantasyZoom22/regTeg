@@ -252,7 +252,7 @@ function calculateTotalPrices() {
       let notification = document.getElementById(`notification${itemId}`); // Get the notification span for the corresponding item
       notification.innerText = quantities[itemId]; // Display the new quantity value in the notification
     }
-let foods = {}; 
+let foods = []; 
     
 btn1.addEventListener("click", function(){
   quantities[1]++; // Increase the quantity for item 1
@@ -538,7 +538,7 @@ mainButton.onClick(function () {
   // Before sending data
   console.log(JSON.stringify(foods));
   //tg.sendData(JSON.stringify(foods), function () {
-  tg.sendData(JSON.stringify(foods), function () {
+  tg.sendData({ foods : JSON.stringify(foods)}, function () {
     console.log("Data sent successfully.");
     tg.close();
   });
