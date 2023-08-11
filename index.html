@@ -515,7 +515,11 @@ mainButton.onClick(function () {
   }
   
   // Send the 'foods' object to the Telegram bot
-  tg.sendData({ foods: JSON.stringify(foods) });
+// Before sending data
+console.log(JSON.stringify(foods));
+tg.sendData({ foods: JSON.stringify(foods) }, function () {
+  console.log("Data sent successfully.");
+  tg.close();
 });
     </script>
 </body>
