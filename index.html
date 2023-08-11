@@ -489,7 +489,7 @@ p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.las
 usercard.appendChild(p);
 
 
-// // Initialize the "save" button
+// Initialize the "save" button
 const mainButton = window.Telegram.WebApp.MainButton;
 mainButton.text = "Save Preferences";
 mainButton.enable();
@@ -498,12 +498,11 @@ mainButton.show();
 // Create an object to store food preferences
 let foods = {};
 
-    
-//send data 
+// Add event listener for the "save" button
 mainButton.onClick(function () {
   console.log("Save button clicked."); // Add this line to debug
 
-  // Store title, quantity, and price of each item in the 'foods' object
+  // Store selected items with their titles, quantities, and prices in the 'foods' object
   for (let itemId in quantities) {
     if (quantities[itemId] > 0) {
       foods[itemId] = {
@@ -517,15 +516,16 @@ mainButton.onClick(function () {
   // Send the 'foods' object as JSON string to the Telegram bot
   tg.sendData({ foods: JSON.stringify(foods) }, function () {
     console.log("Data sent successfully."); // Add this line to confirm data sent
-    tg.close(); // Close the Web App after data is sent
+
+    // You can add additional actions here if needed
+
+    // For example, display a confirmation message to the user
+    alert("Your food preferences have been saved!");
+
+    // Optionally, you can close the Web App after sending the data
+    // tg.close();
   });
 });
-
-    // to test 
-// mainButton.onClick(function () {
-//   tg.sendData({ message: "Hello, bot!" });
-//   // Rest of your code here
-// });
     </script>
 </body>
 </html>
