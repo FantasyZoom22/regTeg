@@ -267,7 +267,7 @@ btn1.addEventListener("click", function(){
   }
   }
   else {
-    tg.MainButton.setText(`Вы выбрали товар ${item}!`);
+    tg.MainButton.setText(`Вы выбрали товар 1! Количество: ${quantities[1]}`);
     item = "1";
     tg.MainButton.show();
   }
@@ -348,7 +348,7 @@ btn5.addEventListener("click", function(){
   }
   }
   else {
-    tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
+    //tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
     item = "5";
     tg.MainButton.show();
   }
@@ -501,50 +501,28 @@ mainButton.show();
 
     
 // //send data 
-// mainButton.onClick(function () {
-//   // Store food preferences in the 'foods' object
-//   let foods = {};
-//   for (let itemId in quantities) {
-//     if (quantities[itemId] > 0) {
-//       foods[itemId] = {
-//         title: document.querySelector(`#item-title${itemId}`).textContent,
-//         quantity: quantities[itemId],
-//         price: itemPrices[itemId]
-//       };
-//     }
-//   }
-  
-//   // Send the 'foods' object to the Telegram bot
-// // Before sending data
-// console.log(JSON.stringify(foods));
-// tg.sendData({ foods: JSON.stringify(foods) }, function () {
-//   console.log("Data sent successfully.");
-//   tg.close();
-// });
-
- // Function to create an inline keyboard with quantity options
-function createInlineKeyboard(itemId) {
-  const options = [
-    { text: '1', callback_data: `quantity:${itemId}:1` },
-    { text: '2', callback_data: `quantity:${itemId}:2` },
-    { text: '3', callback_data: `quantity:${itemId}:3` },
-    // Add more options as needed
-  ];
-
-  return JSON.stringify({
-    inline_keyboard: [options],
-  });
-}
-
-// Update your mainButtonClicked event handler to display the inline keyboard
-Telegram.WebApp.onEvent('mainButtonClicked', function () {
-  if (item && quantities[item] > 0) {
-    const total = itemPrices[item] * quantities[item];
-    tg.showKeyboard(createInlineKeyboard(item));
+mainButton.onClick(function () {
+  // Store food preferences in the 'foods' object
+  let foods = {};
+  for (let itemId in quantities) {
+    if (quantities[itemId] > 0) {
+      foods[itemId] = {
+        title: document.querySelector(`#item-title${itemId}`).textContent,
+        quantity: quantities[itemId],
+        price: itemPrices[itemId]
+      };
+    }
   }
+  
+  // Send the 'foods' object to the Telegram bot
+// Before sending data
+console.log(JSON.stringify(foods));
+tg.sendData({ foods: JSON.stringify(foods) }, function () {
+  console.log("Data sent successfully.");
+  tg.close();
 });
 
-    
+
     </script>
 </body>
 </html>
