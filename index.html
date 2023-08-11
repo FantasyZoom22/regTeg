@@ -496,30 +496,53 @@ mainButton.text = "Save Preferences";
 mainButton.enable();
 mainButton.show();
 
-// Create an object to store food preferences
-let foods = {};
+// // Create an object to store food preferences
+// let foods = {};
 
     
-//send data 
-mainButton.onClick(function () {
-  // Store food preferences in the 'foods' object
-  let foods = {};
-  for (let itemId in quantities) {
-    if (quantities[itemId] > 0) {
-      foods[itemId] = {
-        title: document.querySelector(`#item-title${itemId}`).textContent,
-        quantity: quantities[itemId],
-        price: itemPrices[itemId]
-      };
-    }
-  }
+// //send data 
+// mainButton.onClick(function () {
+//   // Store food preferences in the 'foods' object
+//   let foods = {};
+//   for (let itemId in quantities) {
+//     if (quantities[itemId] > 0) {
+//       foods[itemId] = {
+//         title: document.querySelector(`#item-title${itemId}`).textContent,
+//         quantity: quantities[itemId],
+//         price: itemPrices[itemId]
+//       };
+//     }
+//   }
   
-  // Send the 'foods' object to the Telegram bot
-// Before sending data
-console.log(JSON.stringify(foods));
-tg.sendData({ foods: JSON.stringify(foods) }, function () {
-  console.log("Data sent successfully.");
-  tg.close();
+//   // Send the 'foods' object to the Telegram bot
+// // Before sending data
+// console.log(JSON.stringify(foods));
+// tg.sendData({ foods: JSON.stringify(foods) }, function () {
+//   console.log("Data sent successfully.");
+//   tg.close();
+// });
+
+    const botToken = '6417754836:AAG5lxlzCefe29-sf_2BppAXwlX4vviCYg8';
+
+// Function to send data to the Telegram bot
+function sendToTelegram(itemId, quantity, total) {
+  const message = `Item: ${itemId}\nQuantity: ${quantity}\nTotal Price: $${total}`;
+  fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=@EbarbarosBot&text=${message}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Message sent to Telegram:', data);
+    })
+    .catch(error => {
+      console.error('Error sending message to Telegram:', error);
+    });
+}
+
+// Update your mainButtonClicked event handler to call the sendToTelegram function
+Telegram.WebApp.onEvent('mainButtonClicked', function () {
+  if (item && quantities[item] > 0) {
+    const total = itemPrices[item] * quantities[item];
+    sendToTelegram(item, quantities[item], total);
+  }
 });
     </script>
 </body>
