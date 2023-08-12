@@ -534,7 +534,7 @@ console.log("Save button clicked."); // Add this line to debug
   // tg.sendData("Save button clicked.")
   // tg.close()
   console.log(JSON.stringify(foods));
-  tg.sendData({ foods: JSON.stringify(foods)}, function () {
+  tg.sendData(JSON.stringify(foods), function () {
 
     console.log("Data sent successfully.");
     tg.close();
