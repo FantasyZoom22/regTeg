@@ -531,8 +531,7 @@ usercard.appendChild(p);
 Telegram.WebApp.onEvent("mainButtonClicked", function(){
 
 console.log("Save button clicked."); // Add this line to debug
-  const foodsJson = JSON.stringify(foods);
-  tg.sendData(foodsJson)
+  tg.sendData(foods)
   tg.close()
 });
 
