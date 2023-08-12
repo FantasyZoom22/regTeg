@@ -526,15 +526,8 @@ usercard.appendChild(p);
 
 
 
-// // Initialize the "save" button
-const mainButton = window.Telegram.WebApp.MainButton;
-mainButton.text = "Save Preferences";
-mainButton.enable();
-mainButton.show();
-
-
   
-mainButton.onClick(function () {
+tg.mainButton.onClick(function () {
   // Before sending data
   console.log(JSON.stringify(foods));
   tg.sendData({ foods: JSON.stringify(foods)}, function () {
