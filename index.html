@@ -160,6 +160,7 @@ body {
     </div>
   </div>
   <div class="total-container">
+    <button id="sendDataButton">Send Data to Bot</button>
   <p>Total Price: دج<span id="total-price">0</span></p>
 </div>
 
@@ -533,16 +534,23 @@ mainButton.show();
 
 
   
-mainButton.onClick(function () {
-  // Before sending data
-  console.log(foods);
-  window.Telegram.WebApp.sendData(foods, function () {
-  console.log("Data sent successfully.");
+// mainButton.onClick(function () {
+//   // Before sending data
+//   console.log(foods);
+//   window.Telegram.WebApp.sendData(foods, function () {
+//   console.log("Data sent successfully.");
     
-    tg.close();
-  });
-});
- 
+//     tg.close();
+//   });
+// });
+
+    document.getElementById("sendDataButton").addEventListener("click", function() {
+    
+      tg.sendData(fodds, function() {
+        console.log("Data sent successfully.");
+        tg.MainButton.setText("Data Sent!"); // Update MainButton text
+      });
+    });
     </script>
 </body>
 </html>
