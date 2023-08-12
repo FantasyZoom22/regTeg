@@ -526,24 +526,38 @@ usercard.appendChild(p);
 
 
 
-// // Initialize the "save" button
-const mainButton = window.Telegram.WebApp.MainButton;
-mainButton.text = "Save Preferences";
-mainButton.enable();
-mainButton.show();
+// // // Initialize the "save" button
+// const mainButton = window.Telegram.WebApp.MainButton;
+// mainButton.text = "Save Preferences";
+// mainButton.enable();
+// mainButton.show();
 
 
   
-mainButton.onClick(function () {
-  // Before sending data
-  console.log(JSON.stringify(foods));
-  tg.sendData({ foods: JSON.stringify(foods) }, function () {
-  console.log("Data sent successfully.");
+// mainButton.onClick(function () {
+//   // Before sending data
+//   console.log(JSON.stringify(foods));
+//   tg.sendData({ foods: JSON.stringify(foods) }, function () {
+//   console.log("Data sent successfully.");
     
-    tg.close();
-  });
+//     tg.close();
+//   });
+// });
+    mainButton.onClick(function () {
+  // Store food preferences in the 'foods' object
+  for (let itemId in quantities) {
+    if (quantities[itemId] > 0) {
+      foods[itemId] = {
+        title: document.querySelector(`#item-title${itemId}`).textContent,
+        quantity: quantities[itemId],
+        price: itemPrices[itemId]
+      };
+    }
+  }
+  
+  // Send the 'foods' object to the Telegram bot
+  tg.sendData({ foods: JSON.stringify(foods) });
 });
-    
     </script>
 </body>
 </html>
