@@ -529,8 +529,9 @@ function sendDataToTelegram(itemData) {
   tg.sendData(itemData);
 }
 
+
 // Attach a click event listener to the MainButton
-tg.MainButton.on('click', function () {
+tg.MainButton.onClick(() => {
   // Create an array to store item data
   let itemsData = [];
 
@@ -548,7 +549,7 @@ tg.MainButton.on('click', function () {
 
   // Send the data to the Telegram bot
   if (itemsData.length > 0) {
-    sendDataToTelegram({ items: itemsData });
+    tg.sendData({ items: itemsData });
   }
 });
     </script>
