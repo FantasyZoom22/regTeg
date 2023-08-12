@@ -534,16 +534,19 @@ mainButton.show();
 
 
   
-mainButton.onClick(function () {
-  // Before sending data
-  console.log(JSON.stringify(foods));
-  tg.sendData({ foods: JSON.stringify(foods) }, function () {
+// mainButton.onClick(function () {
+//   // Before sending data
+//   console.log(JSON.stringify(foods));
+//   tg.sendData({ foods: JSON.stringify(foods) }, function () {
 
-    console.log("Data sent successfully.");
-    tg.close();
-  });
-});
+//     console.log("Data sent successfully.");
+//     tg.close();
+//   });
+// });
     
+Telegram.WebApp.onEvent("mainButtonClicked", function(){
+tg.sendData({ foods: JSON.stringify(foods)}); // Send both item and quantity data to Telegram
+});
     </script>
 </body>
 </html>
