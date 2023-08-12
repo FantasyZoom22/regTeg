@@ -528,15 +528,39 @@ usercard.appendChild(p);
 Telegram.WebApp.onEvent("mainButtonClicked", function(){
 
 console.log("Save button clicked."); // Add this line to debug
-  tg.sendData("Save button clicked.")
+  tg.sendData("your food:" + foods )
   tg.close()
 });
 
-    // Handle a service message on the bot's side to get the data sent back from the Web-App
-    Telegram.BotApi.onServiceMessage("data", function (data) {
-      console.log("Received foods data:", data);
-      // You can process the received data here
-      });
+   // Handle a service message on the bot's side to get the data sent back from the Web-App
+Telegram.BotApi.onServiceMessage("data", function (data) {
+  console.log("Received foods data:", data);
+
+  if (data.startsWith("your food:")) {
+    // Remove the "your food:" prefix
+    data = data.substring("your food:".length).trim();
+
+    try {
+      // Parse the JSON data
+      const foods = JSON.parse(data);
+
+      console.log("Parsed foods data:", foods);
+
+      // Process each food item
+      for (const itemId in foods) {
+        const food = foods[itemId];
+        const title = food.title;
+        const quantity = food.quantity;
+        const price = food.price;
+
+        console.log(`Item ${itemId}: ${title}, Quantity: ${quantity}, Price: $${price}`);
+        // You can perform further processing or send a response to the user here
+      }
+    } catch (error) {
+      console.error("Error parsing foods data:", error);
+    }
+  }
+});
 </script>
 </body>
 </html>
