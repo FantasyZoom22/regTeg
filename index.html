@@ -524,34 +524,26 @@ p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.las
 
 usercard.appendChild(p);
 
-// Define a function to send data to the Telegram bot
-function sendDataToTelegram(itemData) {
-  tg.sendData(itemData);
-}
 
 
-// Attach a click event listener to the MainButton
-tg.MainButton.onClick(() => {
-  // Create an array to store item data
-  let itemsData = [];
+// // Initialize the "save" button
+const mainButton = window.Telegram.WebApp.MainButton;
+mainButton.text = "Save Preferences";
+mainButton.enable();
+mainButton.show();
 
-  // Loop through the quantities object to gather item data
-  for (let itemId in quantities) {
-    if (quantities[itemId] > 0) {
-      itemsData.push({
-        itemId: itemId,
-        title: "Pizza",
-        quantity: quantities[itemId],
-        price: itemPrices[itemId]
-      });
-    }
-  }
 
-  // Send the data to the Telegram bot
-  if (itemsData.length > 0) {
-    tg.sendData({ items: itemsData });
-  }
+  
+mainButton.onClick(function () {
+  // Before sending data
+  console.log(JSON.stringify(foods));
+  tg.sendData({ foods: JSON.stringify(foods)}, function () {
+
+    console.log("Data sent successfully.");
+    tg.close();
+  });
 });
+    
     </script>
 </body>
 </html>
