@@ -535,7 +535,7 @@ mainButton.show();
   
 mainButton.onClick(function () {
   // Before sending data
-  console.log(JSON.stringify(foods));
+  //console.log(JSON.stringify(foods));
   tg.sendData({ foods : JSON.stringify(foods)}, function () {
   console.log("Data sent successfully.");
     
