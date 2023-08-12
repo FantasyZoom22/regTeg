@@ -529,7 +529,7 @@ Telegram.WebApp.onEvent("mainButtonClicked", function(){
 
 console.log("Save button clicked."); // Add this line to debug
    tg.sendData("Save button clicked.")
-   //window.Telegram.WebApp.sendData({ message : "sending data"});
+   window.Telegram.WebApp.sendData({ message : "sending data"});
   tg.close()
 });
 
