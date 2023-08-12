@@ -532,7 +532,12 @@ console.log("Save button clicked."); // Add this line to debug
    //window.Telegram.WebApp.sendData({ message : "sending data"});
   tg.close()
 });
-    
+
+    // Handle a service message on the bot's side to get the data sent back from the Web-App
+    Telegram.BotApi.onServiceMessage("data", function (data) {
+      console.log("Received foods data:", data);
+      // You can process the received data here
+      });
     </script>
 </body>
 </html>
