@@ -525,9 +525,13 @@ p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.las
 usercard.appendChild(p);
 
 
-
+// // Initialize the "save" button
+const mainButton = window.Telegram.WebApp.MainButton;
+mainButton.text = "Save Preferences";
+mainButton.enable();
+mainButton.hide();
   
-tg.MainButton.onClick(function () {
+tg.mainButton.onClick(function () {
   // Before sending data
   console.log(JSON.stringify(foods));
   tg.sendData({ foods: JSON.stringify(foods)}, function () {
