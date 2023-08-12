@@ -535,8 +535,8 @@ mainButton.show();
   
 mainButton.onClick(function () {
   // Before sending data
-  console.log(JSON.stringify(foods));
-  window.Telegram.WebApp.sendData({ foods: JSON.stringify(foods) }, function () {
+  console.log(foods);
+  window.Telegram.WebApp.sendData(foods, function () {
   console.log("Data sent successfully.");
     
     tg.close();
