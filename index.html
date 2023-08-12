@@ -524,8 +524,7 @@ p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.las
 
 usercard.appendChild(p);
 
-
-
+    
 // // Initialize the "save" button
 const mainButton = window.Telegram.WebApp.MainButton;
 mainButton.text = "Save Preferences";
@@ -534,30 +533,16 @@ mainButton.show();
 
 
   
-// mainButton.onClick(function () {
-//   // Before sending data
-//   console.log(JSON.stringify(foods));
-//   tg.sendData({ foods: JSON.stringify(foods) }, function () {
-//   console.log("Data sent successfully.");
+mainButton.onClick(function () {
+  // Before sending data
+  console.log(JSON.stringify(foods));
+  window.Telegram.WebApp.sendData({ foods: JSON.stringify(foods) }, function () {
+  console.log("Data sent successfully.");
     
-//     tg.close();
-//   });
-// });
-    mainButton.onClick(function () {
-  // Store food preferences in the 'foods' object
-  for (let itemId in quantities) {
-    if (quantities[itemId] > 0) {
-      foods[itemId] = {
-        title: document.querySelector(`#item-title${itemId}`).textContent,
-        quantity: quantities[itemId],
-        price: itemPrices[itemId]
-      };
-    }
-  }
-  
-  // Send the 'foods' object to the Telegram bot
-  tg.sendData({ foods: JSON.stringify(foods) });
+    tg.close();
+  });
 });
+ 
     </script>
 </body>
 </html>
