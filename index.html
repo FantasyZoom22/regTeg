@@ -108,6 +108,25 @@ body {
   color: yellow;
 }
 
+  /* Add media queries for responsiveness */
+    @media screen and (max-width: 480px) {
+      .container {
+        max-width: 100%; /* Adjust the container width for smaller screens */
+      }
+
+      .inner {
+        grid-template-columns: 1fr; /* Stack items vertically on smaller screens */
+        grid-template-rows: repeat(6, auto); /* Adjust the number of rows as needed */
+      }
+
+      .item {
+        margin: 10px auto; /* Center items horizontally */
+      }
+
+      .img {
+        width: 100%; /* Make images responsive */
+      }
+    }
 </style>
 <body>
   <div class="container">
