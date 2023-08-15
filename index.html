@@ -288,7 +288,7 @@ btn1.addEventListener("click", function(){
   };
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
     if (quantities[1] > 0) {
     removeBtn1.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
      notification1.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -297,7 +297,7 @@ btn1.addEventListener("click", function(){
   else {
     tg.MainButton.setText(`Вы выбрали товар 1! Количество: ${quantities[1]}`);
     item = "1";
-    tg.MainButton.show();
+    tg.MainButton.hide();
   }
   calculateTotalPrices();
 });
@@ -314,7 +314,7 @@ btn2.addEventListener("click", function(){
   };
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
      if (quantities[2] > 0) {
     removeBtn2.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification2.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -323,7 +323,7 @@ btn2.addEventListener("click", function(){
   else {
     tg.MainButton.setText(`Вы выбрали товар 2! Количество: ${quantities[2]}`);
     item = "2";
-    tg.MainButton.show();
+    tg.MainButton.hide();
   }
   calculateTotalPrices();
 });
@@ -341,7 +341,7 @@ btn3.addEventListener("click", function(){
   };
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
      if (quantities[3] > 0) {
     removeBtn3.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification3.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -350,7 +350,7 @@ btn3.addEventListener("click", function(){
   else {
     tg.MainButton.setText(`Вы выбрали товар 3! Количество: ${quantities[3]}`);
     item = "3";
-    tg.MainButton.show();
+    tg.MainButton.hide();
   }
   calculateTotalPrices();
 });
@@ -367,7 +367,7 @@ btn4.addEventListener("click", function(){
   };
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
      if (quantities[4] > 0) {
     removeBtn4.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification4.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -376,7 +376,7 @@ btn4.addEventListener("click", function(){
   else {
     tg.MainButton.setText(`Вы выбрали товар 4! Количество: ${quantities[4]}`);
     item = "4";
-    tg.MainButton.show();
+    tg.MainButton.hide();
   }
   calculateTotalPrices();
 });
@@ -393,7 +393,7 @@ btn5.addEventListener("click", function(){
   };
 
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
      if (quantities[5] > 0) {
     removeBtn5.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification5.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -402,7 +402,7 @@ btn5.addEventListener("click", function(){
   else {
     //tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
     item = "5";
-    tg.MainButton.show();
+    tg.MainButton.hide();
   }
   calculateTotalPrices();
 });
@@ -419,7 +419,7 @@ foods[6] = {
   };
     
   if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+    tg.MainButton.show();
      if (quantities[6] > 0) {
     removeBtn6.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification6.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -428,7 +428,7 @@ foods[6] = {
   else {
     //tg.MainButton.setText(`Вы выбрали товар 6! Количество: ${quantities[6]}`);
     item = "6";
-    tg.MainButton.show();
+    tg.MainButton.hide();
   }
   calculateTotalPrices();
 });
