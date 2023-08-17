@@ -561,28 +561,6 @@ console.log("Save button clicked."); // Add this line to debug
  
 });
 
-    // Handle a service message on the bot's side to get the data sent back from the Web-App
-    // Telegram.BotApi.onServiceMessage("data", function (data) {
-    //   console.log("Received foods data:", data);
-      // You can process the received data here
-  var botApi = new Telegram.BotApi('6417754836:AAGcA8Ht-kEyR5Eu5I50-boZotHGjSrL1mQ');
-  Telegram.BotApi.onServiceMessage("data", function (data) {
-  console.log("Received foods data:", data);
-
-  // Process the received data
-  if (data && data.foods && data.chatId) {
-    // Update the UI with the received food data
-    updateFoodList(data.foods);
-
-    // Send the received data back to the chat
-    var chatId = data.chatId;
-    var message = "Here are the received foods:\n" + formatFoods(data.foods);
-
-    Telegram.BotApi.sendMessage(chatId, message);
-  } else {
-    console.error("Invalid or missing data received");
-  }
-      });
 </script>
 </body>
 </html> 
