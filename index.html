@@ -562,56 +562,31 @@ usercard.appendChild(p);
 // });
 
 
-//   Telegram.WebApp.onEvent("mainButtonClicked", function () {
-//   console.log("Save button clicked.");
-//   console.log(JSON.stringify(foods));
+  Telegram.WebApp.onEvent("mainButtonClicked", function () {
+  console.log("Save button clicked.");
+  console.log(JSON.stringify(foods));
 
-//   var scriptUrl = "https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec"; // Replace with your Google Apps Script URL
+  var scriptUrl = "https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec"; // Replace with your Google Apps Script URL
 
-//   var xhr = new XMLHttpRequest();
-//   xhr.open("POST", scriptUrl, true);
-//   xhr.setRequestHeader("Content-Type", "application/json");
-//   xhr.onreadystatechange = function () {
-//     if (xhr.readyState === 4 && xhr.status === 200) {
-//       console.log("Data sent to Google Apps Script.");
-//     }
-//   };
-
-//   var chatId = Telegram.WebApp.initDataUnsafe.user.id; // Extract chat ID
-//   var dataToSend = {
-//     chatId: chatId,
-//     foods: foods,
-//   };
-
-//   xhr.send(JSON.stringify(dataToSend));
-//   tg.close();
-// });
-
-  
-  let userFullName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
-
-Telegram.WebApp.onEvent("mainButtonClicked", function() {
-  let requestData = {
-    userName: userFullName,
-    foods: foods
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", scriptUrl, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log("Data sent to Google Apps Script.");
+    }
   };
 
-  fetch("https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(requestData)
-  })
-  .then(response => response.text())
-  .then(data => {
-    console.log("Data sent successfully:", data);
-    tg.close();
-  })
-  .catch(error => {
-    console.error("Error sending data:", error);
-  });
+  var chatId = Telegram.WebApp.initDataUnsafe.user.id; // Extract chat ID
+  var dataToSend = {
+    chatId: chatId,
+    foods: foods,
+  };
+
+  xhr.send(JSON.stringify(dataToSend));
+  tg.close();
 });
+
 
 
 </script>
