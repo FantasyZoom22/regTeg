@@ -7,6 +7,7 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://apis.google.com/js/api.js"></script>
   <title>Document</title>
 </head>
 <style>
@@ -587,43 +588,30 @@ usercard.appendChild(p);
 //   tg.close();
 // });
 
-  // JavaScript Code
+let userFullName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
 
-// ... (Your existing code)
-
-Telegram.WebApp.onEvent("mainButtonClicked", function () {
-  console.log("Save button clicked.");
-  console.log(JSON.stringify(foods));
-
-  var scriptUrl = "https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec"; // Replace with your Google Apps Script URL
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", scriptUrl, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      var response = JSON.parse(xhr.responseText);
-      console.log("Response received from Google Apps Script:", response);
-
-      // Send the response back to the Telegram bot chat
-      var token = "6417754836:AAGcA8Ht-kEyR5Eu5I50-boZotHGjSrL1mQ";
-      var chatId = Telegram.WebApp.initDataUnsafe.user.id; // Extract chat ID
-      var message = "Response from Google Apps Script:\n" + response.message;
-
-      sendTelegramMessage(token, chatId, message);
-    }
+Telegram.WebApp.onEvent("mainButtonClicked", function() {
+  let requestData = {
+    userName: userFullName,
+    foods: foods
   };
 
-  var chatId = Telegram.WebApp.initDataUnsafe.user.id; // Extract chat ID
-  var dataToSend = {
-    chatId: chatId,
-    foods: foods,
-  };
-
-  xhr.send(JSON.stringify(dataToSend));
-  tg.close();
+  fetch("https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(requestData)
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log("Data sent successfully:", data);
+    tg.close();
+  })
+  .catch(error => {
+    console.error("Error sending data:", error);
+  });
 });
-
 </script>
 </body>
 </html> 
