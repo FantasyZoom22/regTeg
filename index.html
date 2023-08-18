@@ -634,18 +634,17 @@ usercard.appendChild(p);
 // });
 
 
-
-  const sendHttpRequest = (method, url, data) => {
+   const sendHttpRequest = (method, url, data) => {
       const promise = new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open(method, url);
-  
+    
         xhr.responseType = 'json';
-  
+    
         if (data) {
           xhr.setRequestHeader('Content-Type', 'application/json');
         }
-  
+    
         xhr.onload = () => {
           if (xhr.status >= 400) {
             reject(xhr.response);
@@ -653,47 +652,42 @@ usercard.appendChild(p);
             resolve(xhr.response);
           }
         };
-  
+    
         xhr.onerror = () => {
           reject('Something went wrong!');
         };
-  
-        xhr.send(JSON.stringify(data));
+    
+        xhr.send(data ? JSON.stringify(data) : null);
       });
       return promise;
     };
 
-    const sendDataToAirtable = () => {
-      const airtableApiKey = "patPfi3iwvm7fwS9x.ef7fbaa1f00016905e627f9d6f2128f787b4704b24a053495585691b817da270";
-      const airtableBaseId = "appqJN3M8eqVfBxTQ/tblhrjnuhrSBIKcaZ/viwpJPcINdH1kArkf";
-      const airtableTable = "Orders";
-      const airtableApiUrl = `https://api.airtable.com/v0/${airtableBaseId}/${airtableTable}`;
+    const airtableApiKey = "patPfi3iwvm7fwS9x.ef7fbaa1f00016905e627f9d6f2128f787b4704b24a053495585691b817da270";
+    const airtableBaseId = "appqJN3M8eqVfBxTQ/tblhrjnuhrSBIKcaZ/viwpJPcINdH1kArkf";
+    const airtableTable = "Orders"; // Update with your Airtable table name
 
+    const airtableApiUrl = `https://api.airtable.com/v0/${airtableBaseId}/${airtableTable}`;
+
+    const sendData = () => {
       const records = [];
       for (const itemId in foods) {
         const food = foods[itemId];
-        const record = {
+        records.push({
           fields: {
             ChatId: Telegram.WebApp.initDataUnsafe.user.id,
             Title: food.title,
             Quantity: food.quantity,
             Price: food.price,
           },
-        };
-        records.push(record);
+        });
       }
 
-      const dataToSend = {
-        records: records,
-      };
-
-      sendHttpRequest("POST", airtableApiUrl, dataToSend)
+      sendHttpRequest('POST', airtableApiUrl, { records })
         .then(responseData => {
-          console.log(responseData);
-          tg.close();
+          console.log('Data sent to Airtable:', responseData);
         })
         .catch(err => {
-          console.error("Error sending data to Airtable:", err);
+          console.log('Error sending data to Airtable:', err);
         });
     };
 
