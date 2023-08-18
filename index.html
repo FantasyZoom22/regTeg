@@ -629,10 +629,12 @@ usercard.appendChild(p);
   var dataToSend = {
     records: records,
   };
-
+  
   xhr.send(JSON.stringify(dataToSend));
+  console.log("XHR response:", xhr.status, xhr.responseText);
   tg.close();
 });
+
 
 
 </script>
