@@ -545,45 +545,20 @@ p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.las
 usercard.appendChild(p);
 
 
-// Telegram.WebApp.onEvent("mainButtonClicked", function(){
+Telegram.WebApp.onEvent("mainButtonClicked", function(){
 
-// console.log("Save button clicked."); // Add this line to debug
-//   // tg.sendData("Save button clicked.")
-//   // tg.close()
-//   console.log(JSON.stringify(foods));
-//   tg.sendData(JSON.stringify(foods), function () {
-
-//     console.log("Data sent successfully.");
-//     tg.close();
-//   });
- 
-// });
-
-
-  Telegram.WebApp.onEvent("mainButtonClicked", function () {
-  console.log("Save button clicked.");
+console.log("Save button clicked."); // Add this line to debug
+  // tg.sendData("Save button clicked.")
+  // tg.close()
   console.log(JSON.stringify(foods));
+  tg.sendData(JSON.stringify(foods), function () {
 
-  var scriptUrl = "https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec"; // Replace with your Google Apps Script URL
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", scriptUrl);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      console.log("Data sent to Google Apps Script.");
-    }
-  };
-
-  var chatId = Telegram.WebApp.initDataUnsafe.user.id; // Extract chat ID
-  var dataToSend = {
-    chatId: chatId,
-    foods: foods,
-  };
-
-  xhr.send(JSON.stringify(dataToSend));
-  tg.close();
+    console.log("Data sent successfully.");
+    tg.close();
+  });
+ 
 });
+
 
 </script>
 </body>
