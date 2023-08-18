@@ -557,6 +557,31 @@ console.log("Save button clicked."); // Add this line to debug
     tg.close();
   });
 
+ // Create an XHR object
+    var xhr = new XMLHttpRequest();
+
+    // Define the URL where you will send the data
+    var url = 'https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec'; // Replace with your server endpoint
+
+    // Set up the XHR request
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+    // Callback function when the XHR request completes
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log('Data sent successfully.');
+            tg.close();
+        } else {
+            console.log('Error sending data.');
+        }
+    };
+
+    // Send the `foods` data to the server
+    xhr.send(JSON.stringify(foods));
+
+ tg.close();
+  
 });
 
 
