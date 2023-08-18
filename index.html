@@ -597,7 +597,7 @@ usercard.appendChild(p);
   var airtableApiUrl = `https://api.airtable.com/v0/${airtableBaseId}/${airtableTable}`;
 
   var xhr = new XMLHttpRequest();
-  xhr.open("PUT", airtableApiUrl, true);
+  xhr.open("POST", airtableApiUrl, true);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Authorization", `Bearer ${airtableApiKey}`);
   xhr.onreadystatechange = function () {
