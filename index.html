@@ -586,54 +586,116 @@ usercard.appendChild(p);
 // });
 
 
-  Telegram.WebApp.onEvent("mainButtonClicked", function () {
-  console.log("Save button clicked.");
-  console.log(JSON.stringify(foods));
+//   Telegram.WebApp.onEvent("mainButtonClicked", function () {
+//   console.log("Save button clicked.");
+//   console.log(JSON.stringify(foods));
 
-  var airtableApiKey = "patPfi3iwvm7fwS9x.ef7fbaa1f00016905e627f9d6f2128f787b4704b24a053495585691b817da270";
-  var airtableBaseId = "appqJN3M8eqVfBxTQ/tblhrjnuhrSBIKcaZ/viwpJPcINdH1kArkf";
-  var airtableTable = "Orders"; // Update with your Airtable table name
+//   var airtableApiKey = "patPfi3iwvm7fwS9x.ef7fbaa1f00016905e627f9d6f2128f787b4704b24a053495585691b817da270";
+//   var airtableBaseId = "appqJN3M8eqVfBxTQ/tblhrjnuhrSBIKcaZ/viwpJPcINdH1kArkf";
+//   var airtableTable = "Orders"; // Update with your Airtable table name
 
-  var airtableApiUrl = `https://api.airtable.com/v0/${airtableBaseId}/${airtableTable}`;
+//   var airtableApiUrl = `https://api.airtable.com/v0/${airtableBaseId}/${airtableTable}`;
 
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", airtableApiUrl, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.setRequestHeader("Authorization", `Bearer ${airtableApiKey}`);
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200 || xhr.status === 201) {
-        console.log("Data sent to Airtable.");
-      } else {
-        console.error("Error sending data to Airtable:", xhr.responseText);
-      }
-    }
-  };
+//   var xhr = new XMLHttpRequest();
+//   xhr.open("POST", airtableApiUrl, true);
+//   xhr.setRequestHeader("Content-Type", "application/json");
+//   xhr.setRequestHeader("Authorization", `Bearer ${airtableApiKey}`);
+//   xhr.onreadystatechange = function () {
+//     if (xhr.readyState === 4) {
+//       if (xhr.status === 200 || xhr.status === 201) {
+//         console.log("Data sent to Airtable.");
+//       } else {
+//         console.error("Error sending data to Airtable:", xhr.responseText);
+//       }
+//     }
+//   };
 
-  var records = [];
-  for (var itemId in foods) {
-    var food = foods[itemId];
-    var record = {
-      fields: {
-        ChatId: Telegram.WebApp.initDataUnsafe.user.id,
-        Title: food.title,
-        Quantity: food.quantity,
-        Price: food.price,
-      },
-    };
-    records.push(record);
-  }
+//   var records = [];
+//   for (var itemId in foods) {
+//     var food = foods[itemId];
+//     var record = {
+//       fields: {
+//         ChatId: Telegram.WebApp.initDataUnsafe.user.id,
+//         Title: food.title,
+//         Quantity: food.quantity,
+//         Price: food.price,
+//       },
+//     };
+//     records.push(record);
+//   }
 
-  var dataToSend = {
-    records: records,
-  };
+//   var dataToSend = {
+//     records: records,
+//   };
   
-  xhr.send(JSON.stringify(dataToSend));
-  console.log("XHR response:", xhr.status, xhr.responseText);
-  tg.close();
-});
+//   xhr.send(JSON.stringify(dataToSend));
+//   console.log("XHR response:", xhr.status, xhr.responseText);
+//   tg.close();
+// });
 
 
+
+  const sendHttpRequest = (method, url, data) => {
+      const promise = new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+  
+        xhr.responseType = 'json';
+  
+        if (data) {
+          xhr.setRequestHeader('Content-Type', 'application/json');
+        }
+  
+        xhr.onload = () => {
+          if (xhr.status >= 400) {
+            reject(xhr.response);
+          } else {
+            resolve(xhr.response);
+          }
+        };
+  
+        xhr.onerror = () => {
+          reject('Something went wrong!');
+        };
+  
+        xhr.send(JSON.stringify(data));
+      });
+      return promise;
+    };
+
+    const sendDataToAirtable = () => {
+      const airtableApiKey = "patPfi3iwvm7fwS9x.ef7fbaa1f00016905e627f9d6f2128f787b4704b24a053495585691b817da270";
+      const airtableBaseId = "appqJN3M8eqVfBxTQ/tblhrjnuhrSBIKcaZ/viwpJPcINdH1kArkf";
+      const airtableTable = "Orders";
+      const airtableApiUrl = `https://api.airtable.com/v0/${airtableBaseId}/${airtableTable}`;
+
+      const records = [];
+      for (const itemId in foods) {
+        const food = foods[itemId];
+        const record = {
+          fields: {
+            ChatId: Telegram.WebApp.initDataUnsafe.user.id,
+            Title: food.title,
+            Quantity: food.quantity,
+            Price: food.price,
+          },
+        };
+        records.push(record);
+      }
+
+      const dataToSend = {
+        records: records,
+      };
+
+      sendHttpRequest("POST", airtableApiUrl, dataToSend)
+        .then(responseData => {
+          console.log(responseData);
+          tg.close();
+        })
+        .catch(err => {
+          console.error("Error sending data to Airtable:", err);
+        });
+    };
 
 </script>
 </body>
