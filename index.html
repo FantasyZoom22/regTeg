@@ -585,26 +585,27 @@ usercard.appendChild(p);
 //   tg.close();
 // });
 
- function sendDataToGoogleAppsScript(data) {
-      return new Promise((resolve, reject) => {
-        const scriptUrl = "https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec"; // Replace with your Google Apps Script URL
+function sendDataToGoogleAppsScript(data) {
+  return new Promise((resolve, reject) => {
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec";
 
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", scriptUrl);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              resolve("Data sent to Google Apps Script.");
-            } else {
-              reject("Failed to send data to Google Apps Script.");
-            }
-          }
-        };
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", scriptUrl); // Use the appropriate HTTP method here (e.g., "POST")
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve("Data sent to Google Apps Script.");
+        } else {
+          reject("Failed to send data to Google Apps Script.");
+        }
+      }
+    };
 
-        xhr.send(JSON.stringify(data));
-      });
-    }
+    xhr.send(JSON.stringify(data));
+  });
+}
+
 
 
     // Update the mainButtonClicked event handler to use the Promise-based function
