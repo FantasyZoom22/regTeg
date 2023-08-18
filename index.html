@@ -562,31 +562,77 @@ usercard.appendChild(p);
 // });
 
 
+//   Telegram.WebApp.onEvent("mainButtonClicked", function () {
+//   console.log("Save button clicked.");
+//   console.log(JSON.stringify(foods));
+
+//   var scriptUrl = "https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec"; // Replace with your Google Apps Script URL
+
+//   var xhr = new XMLHttpRequest();
+//   xhr.open("POST", scriptUrl, true);
+//   xhr.setRequestHeader("Content-Type", "application/json");
+//   xhr.onreadystatechange = function () {
+//     if (xhr.readyState === 4 && xhr.status === 200) {
+//       console.log("Data sent to Google Apps Script.");
+//     }
+//   };
+
+//   var chatId = Telegram.WebApp.initDataUnsafe.user.id; // Extract chat ID
+//   var dataToSend = {
+//     chatId: chatId,
+//     foods: foods,
+//   };
+
+//   xhr.send(JSON.stringify(dataToSend));
+//   tg.close();
+// });
+
+
   Telegram.WebApp.onEvent("mainButtonClicked", function () {
   console.log("Save button clicked.");
   console.log(JSON.stringify(foods));
 
-  var scriptUrl = "https://script.google.com/macros/s/AKfycbzRuc_TqUsLK7bmYj3QLvl8-MtpeGOCTV_dOoMLm2DzOK2wZAT7n0hRRA4-KMFv6wBWSw/exec"; // Replace with your Google Apps Script URL
+  var airtableApiKey = "patPfi3iwvm7fwS9x.ef7fbaa1f00016905e627f9d6f2128f787b4704b24a053495585691b817da270";
+  var airtableBaseId = "appqJN3M8eqVfBxTQ/tblhrjnuhrSBIKcaZ/viwpJPcINdH1kArkf";
+  var airtableTable = "Orders"; // Update with your Airtable table name
+
+  var airtableApiUrl = `https://api.airtable.com/v0/${airtableBaseId}/${airtableTable}`;
 
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", scriptUrl, true);
+  xhr.open("POST", airtableApiUrl, true);
   xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("Authorization", `Bearer ${airtableApiKey}`);
   xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      console.log("Data sent to Google Apps Script.");
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200 || xhr.status === 201) {
+        console.log("Data sent to Airtable.");
+      } else {
+        console.error("Error sending data to Airtable:", xhr.responseText);
+      }
     }
   };
 
-  var chatId = Telegram.WebApp.initDataUnsafe.user.id; // Extract chat ID
+  var records = [];
+  for (var itemId in foods) {
+    var food = foods[itemId];
+    var record = {
+      fields: {
+        ChatId: Telegram.WebApp.initDataUnsafe.user.id,
+        Title: food.title,
+        Quantity: food.quantity,
+        Price: food.price,
+      },
+    };
+    records.push(record);
+  }
+
   var dataToSend = {
-    chatId: chatId,
-    foods: foods,
+    records: records,
   };
 
   xhr.send(JSON.stringify(dataToSend));
   tg.close();
 });
-
 
 
 </script>
