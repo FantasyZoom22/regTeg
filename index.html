@@ -556,7 +556,9 @@ console.log("Save button clicked."); // Add this line to debug
     console.log("Data sent successfully.");
     tg.close();
   });
- 
+
+  tg.tg.sendMessage(JSON.stringify(foods))
+  
 });
 
 
