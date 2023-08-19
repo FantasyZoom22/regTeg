@@ -131,17 +131,17 @@ body {
   <div class="container">
     <div class="inner">
       <div class="item">
-        <div class="item-title">Pizza</div>
+        <div class="item-title">Tako</div>
         <span class="item-price" id="item-price1">Price: $15</span> <!-- Updated price -->
-        <img src="https://freepngimg.com/thumb/food/139065-food-plate-fish-free-download-png-hq-thumb.png" alt="" class="img">
+        <img src="https://drive.google.com/file/d/1AVLVGkXfdb5UcJ7-t0peg0FG-cJHsl-s/view?usp=drive_link" alt="" class="img">
         <button class="btn" id="btn1">Add</button>
                 <button class="btn remove-btn" id="removeBtn1">-</button>
                 <span class="notification" id="notification1"></span>
       </div>
       <div class="item">
-       <div class="item-title">Pizza</div>
+       <div class="item-title">Hotdog</div>
       <span class="item-price" id="item-price2">Price: $10</span> 
-        <img src="https://pics.clipartpng.com/Pizza_PNG_Clipart-572.png" alt="" class="img">
+        <img src="https://drive.google.com/file/d/1h-tvLuELT-E0TLKRB8hyb_gc1GoBZnEu/view?usp=drive_link" alt="" class="img">
         <button class="btn" id="btn2">Add</button>
                 <button class="btn remove-btn" id="removeBtn2">-</button>
                 <span class="notification" id="notification2"></span>
@@ -280,7 +280,7 @@ btn1.addEventListener("click", function(){
   updateNotification(1); // Update the notification with the new quantity
 
   foods[1] = {
-    title: "Pizza",
+    title: "Tako",
     quantity: quantities[1],
     price: itemPrices[1]
   };
@@ -306,7 +306,7 @@ btn2.addEventListener("click", function(){
   updatePrice(2); // Increase the price for item 1
 
   foods[2] = {
-    title: "Pizza",
+    title: "Hotdog",
     quantity: quantities[2],
     price: itemPrices[2]
   };
@@ -597,12 +597,15 @@ fetch(url, {
   if (response.ok) {
     console.log('Data sent successfully.');
     // Close the Telegram window or perform any other actions
+    tg.close();
   } else {
     console.log('Error sending data.');
   }
 })
 .catch(error => {
   console.error('An error occurred:', error);
+
+  
 });
   });
 </script>
