@@ -585,13 +585,14 @@ console.log("Save button clicked."); // Add this line to debug
 // });
 
 var url = 'https://hkdk.events/m9HuvysdZVvs'; // Replace with your server endpoint
-
+let chatId = tg.initDataUnsafe.user.id;
+  
 fetch(url, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json;charset=UTF-8'
   },
-  body: JSON.stringify(foods)
+  body: JSON.stringify({ foods, chatId })
 })
 .then(response => {
   if (response.ok) {
