@@ -72,7 +72,7 @@ body {
     }
   
 .remove-btn {
-  display: inline;
+  display: none;
 }
 
 
@@ -289,7 +289,7 @@ btn1.addEventListener("click", function(){
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-    if (quantities[1] > 0) {
+    if (quantities[1] >= 0) {
     removeBtn1.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
      notification1.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
@@ -315,7 +315,7 @@ btn2.addEventListener("click", function(){
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-     if (quantities[2] > 0) {
+     if (quantities[2] >= 0) {
     removeBtn2.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification2.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
@@ -342,7 +342,7 @@ btn3.addEventListener("click", function(){
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-     if (quantities[3] > 0) {
+     if (quantities[3] >= 0) {
     removeBtn3.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification3.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
@@ -368,7 +368,7 @@ btn4.addEventListener("click", function(){
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-     if (quantities[4] > 0) {
+     if (quantities[4] >= 0) {
     removeBtn4.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification4.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
@@ -394,7 +394,7 @@ btn5.addEventListener("click", function(){
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-     if (quantities[5] > 0) {
+     if (quantities[5] >= 0) {
     removeBtn5.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification5.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
@@ -420,7 +420,7 @@ foods[6] = {
     
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-     if (quantities[6] > 0) {
+     if (quantities[6] >= 0) {
     removeBtn6.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification6.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
