@@ -297,7 +297,7 @@ btn1.addEventListener("click", function(){
     tg.MainButton.show();
   }
 
-     if (quantities[1] > 0) {
+     if (quantities[1] >= 0) {
     removeBtn1.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
      notification1.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
@@ -345,15 +345,15 @@ btn3.addEventListener("click", function(){
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-     if (quantities[3] >= 0) {
-    removeBtn3.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
-    notification3.style.display = "inline"; // Show the notification when the quantity is greater than 0
-  }
   }
   else {
     tg.MainButton.setText(`Вы выбрали товар 3! Количество: ${quantities[3]}`);
     item = "3";
     tg.MainButton.show();
+  }
+     if (quantities[3] >= 0) {
+    removeBtn3.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
+    notification3.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
   calculateTotalPrices();
 });
@@ -371,15 +371,15 @@ btn4.addEventListener("click", function(){
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-     if (quantities[4] >= 0) {
-    removeBtn4.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
-    notification4.style.display = "inline"; // Show the notification when the quantity is greater than 0
-  }
   }
   else {
     tg.MainButton.setText(`Вы выбрали товар 4! Количество: ${quantities[4]}`);
     item = "4";
     tg.MainButton.show();
+  }
+   if (quantities[4] >= 0) {
+    removeBtn4.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
+    notification4.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
   calculateTotalPrices();
 });
@@ -397,15 +397,15 @@ btn5.addEventListener("click", function(){
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-     if (quantities[5] >= 0) {
-    removeBtn5.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
-    notification5.style.display = "inline"; // Show the notification when the quantity is greater than 0
-  }
   }
   else {
     //tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
     item = "5";
     tg.MainButton.show();
+  }
+     if (quantities[5] >= 0) {
+    removeBtn5.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
+    notification5.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
   calculateTotalPrices();
 });
@@ -423,15 +423,15 @@ foods[6] = {
     
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-     if (quantities[6] >= 0) {
-    removeBtn6.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
-    notification6.style.display = "inline"; // Show the notification when the quantity is greater than 0
-  }
   }
   else {
     //tg.MainButton.setText(`Вы выбрали товар 6! Количество: ${quantities[6]}`);
     item = "6";
     tg.MainButton.show();
+  }
+       if (quantities[6] >= 0) {
+    removeBtn6.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
+    notification6.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
   calculateTotalPrices();
 });
