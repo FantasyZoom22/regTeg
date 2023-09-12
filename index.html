@@ -289,9 +289,9 @@ btn1.addEventListener("click", function(){
 
   if (tg.MainButton.isVisible) {
     tg.MainButton.show();
-    if (quantities[1] >= 1) {
+    if (quantities[1] >= 0) {
     removeBtn1.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
-     notification1.style.display = "inline-block"; // Show the notification when the quantity is greater than 0
+     notification1.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
   }
   else {
@@ -317,7 +317,7 @@ btn2.addEventListener("click", function(){
     tg.MainButton.show();
      if (quantities[2] >= 0) {
     removeBtn2.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
-    notification2.style.display = "inline-block"; // Show the notification when the quantity is greater than 0
+    notification2.style.display = "inline"; // Show the notification when the quantity is greater than 0
   }
   }
   else {
