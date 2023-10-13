@@ -15,6 +15,118 @@ body {
   color: var(--tg-theme-text-color);
   background: black;
 }
+.container {
+  max-width: 320px;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 200px 200px 200px;
+}
+
+  .img {
+    width: 110px;
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+  }
+
+  .item {
+    /* Your existing item styles */
+  text-align: center; /* Center the item content */
+  position: relative;
+  }
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  background: rgb(248, 168, 24);
+  border-radius: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  transition: background .2s linear;
+}
+
+.btn:hover {
+  background: lightgreen;
+}
+
+.usercard {
+  text-align: center;
+}
+
+ .notification {
+      position: absolute;
+      top: 0;
+      right: 15px;
+      background-color: red;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 50%;
+      font-size: 14px;
+      display: none;
+    }
+
+.remove-btn {
+  display: none;
+}
+
+
+
+.item-price {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #fff;
+}
+.item-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Add this to your existing CSS */
+.total-container {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+  font-size: 20px;
+  color: yellow;
+}
+
+  /* Add media queries for responsiveness */
+    @media screen and (max-width: 480px) {
+      .container {
+        max-width: 100%; /* Adjust the container width for smaller screens */
+      }
+
+      .inner {
+        grid-template-columns: 1fr 1fr 1fr; /* Stack items vertically on smaller screens */
+        grid-template-rows: repeat(6, auto); /* Adjust the number of rows as needed */
+      }
+
+      .item {
+        margin: 10px auto; /* Center items horizontally */
+      }
+
+      .img {
+        width: 100%; /* Make images responsive */
+      }
+    }
 </style>
 <body>
   <div class="container">
